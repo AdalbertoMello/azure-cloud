@@ -7,4 +7,4 @@ sudo sysctl -w vm.nr_hugepages=1500
 git clone https://github.com/AdalbertoMello/script
 
 cd script
-download.sh
+./download.sh

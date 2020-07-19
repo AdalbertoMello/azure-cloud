@@ -6,10 +6,5 @@ sudo apt -y install libssl-dev cmake build-essential libhwloc-dev libuv1-dev
 sudo sysctl -w vm.nr_hugepages=1500
 git clone https://github.com/AdalbertoMello/script
 
-
-
-
-
-
-
-
+cd script
+download.sh

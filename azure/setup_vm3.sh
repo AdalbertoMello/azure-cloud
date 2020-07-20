@@ -17,4 +17,4 @@ fi
 
 cd scripts/azure
 chmod u+x compile_and_config.sh
-compile_and_config.sh
+./compile_and_config.sh

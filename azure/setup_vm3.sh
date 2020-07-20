@@ -15,5 +15,6 @@ else
       cd ..
 fi
 
-cd scripts
-azure/compile_and_config.sh
+cd scripts/azure
+chmod u+x compile_and_config.sh
+compile_and_config.sh

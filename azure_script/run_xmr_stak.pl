@@ -268,24 +268,16 @@ sub CreateCPUSection{
 #of threads and the given intensity
 #current directory should be the bin-directory of xmr-stak
 sub CreateUserConfig { 
-    my $t = shift;
+    my $t      = shift;
     my $i = shift;
     my $printTime= shift;
     
     my $configstring=$configProlog;
-    $configstring.= CreateCPUSection($t,$i);
+    $configstring.=CreateCPUSection($t,$i);
     $configstring.= CreatePoolSection(0);
     $configstring.= '"print-time": ';
     $configstring.= "$printTime,";
     $configstring.= '}';
-    
-    system 'ls ';
-    
-    system 'cd /xmrig/build/' ;
-    
-    chdir "xmrig/build";
-    
-    system("ls ");
 
     my $filename = 'userconfig.json';
     open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
@@ -294,7 +286,7 @@ sub CreateUserConfig {
 }
 
 sub CreateDonationConfig{
-    my $t = shift;
+    my $t      = shift;
     my $i = shift;
     
     my $configstring=$configProlog;

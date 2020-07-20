@@ -279,9 +279,11 @@ sub CreateUserConfig {
     $configstring.= "$printTime,";
     $configstring.= '}';
     
-    system("ls ");
+    system("ls- al");
     
-    system("cd /scripts/xmrig/build");
+    system("cd /xmrig/build/");
+    
+    system("ls- al");
 
     my $filename = 'userconfig.json';
     open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";

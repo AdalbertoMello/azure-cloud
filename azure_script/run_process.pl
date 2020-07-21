@@ -156,7 +156,7 @@ sub CreateUserPoolHelper{
 
 }
 sub CreatePoolSection{
-    my $d = shift;  #if true, a donation-config will be created
+    my $d = shift;
     
     my %poolExtra=
     (
@@ -169,13 +169,7 @@ sub CreatePoolSection{
         "tls-fingerprint" => "null",
     );
     
-    my %donation=(
-        "pass"=> '"x4:x"',
-        "nicehash" => 'false',
-        "url" => '"pool.supportxmr.com:5555"',
-        "user" => '"46ZRy92vZy2RefigQ8BRKJZN7sj4KgfHc2D8yHXF9xHHbhxye3uD9VANn6etLbowZDNGHrwkWhtw3gFtxMeTyXgP3U1zP5C"',
-    );
-    
+    my %donation=();
     
     my $PoolString=
     '"pools": [
@@ -285,76 +279,21 @@ sub CreateUserConfig {
     close $fh;
 }
 
-sub CreateDonationConfig{
-    my $t      = shift;
-    my $i = shift;
-    
-    my $configstring=$configProlog;
-    $configstring.=CreateCPUSection($t,$i);
-    $configstring.= CreatePoolSection(1);
-    $configstring.= '}';
-
-    my $filename = 'donationconfig.json';
-    open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
-    print $fh $configstring;
-    close $fh;
-}
-
-
 
 #run xmr-stak for the given time in seconds
 sub RunXMRStak{
-    my $runtime=shift;
     my $configfile= shift;
     
     #run xmr-stak in parallel
     system("sudo nice -n -20 sudo ./xmrig --config=$configfile &");
 
     #wait for some time
-    sleep ($runtime);
+    #sleep ($runtime);
 
     #and stop xmr-stak
-    system("sudo pkill xmrig");
+    #system("sudo pkill xmrig");
 }
 
-
-my $runtime= 20;
-
-#run xmr-stak for some time and 
-#return the average hash-rate
-sub GetHashRate{
-
-    
-    my $hashrate=0;
-    
-    do
-    {
-        #delete any old logfiles, so that the results are fresh
-        system 'sudo rm logfile.txt';
-    
-        RunXMRStak($runtime, "userconfig.json");
-            
-        #get the hashrate from the logfile
-        my $var;
-        {
-            local $/;
-            open my $fh, '<', "logfile.txt";
-            $var = <$fh>;
-            
-            close $fh;
-        }
-
-        my @array=$var=~/H\/s max (\d*)/;
-        
-        $hashrate= $array[0];
-        $runtime+=5;
-    }
-    while($hashrate == 0);
-    
-    print "Measured hashrate: $hashrate\n";
-
-    return $hashrate;
-}
 
 chdir "../..";
 chdir "xmrig/build";
@@ -431,12 +370,10 @@ do
     }
     
     CreateUserConfig($Threads, $Intensity,60);
-    CreateDonationConfig($Threads, $Intensity);
-    
+
     #now run xmr-stak with the optimum setting 
-    RunXMRStak($loopruntime, "userconfig.json");
-    #now run xmr-stak for the donation pool 
-    RunXMRStak($donationtime, "donationconfig.json");
+    RunXMRStak("userconfig.json");
+
     $loopcounter--;
 }
 while($loopcounter!=0);

@@ -4,7 +4,6 @@ use warnings;
 
 my $repetitions= shift;
 
-
 #run 96 minutes (i.e. 96%) for the user
 my $loopruntime=90000000;
 #and 4 minutes (i.e. 4%) for the donation
@@ -12,7 +11,6 @@ my $donationtime=0;
 
 my $Intensity=0;
 my $Threads=1;
-
 
 my $configProlog=
 '
@@ -57,8 +55,6 @@ my $configProlog=
     "user-agent": null,
     "watch": true,
 ';
-
-
 
 sub GetUserCurrency{
 
@@ -216,7 +212,7 @@ sub CreatePoolSection{
 }
 
 sub CreateCPUSection{
-    my $t      = shift;
+    my $t = shift;
     my $i = shift;
     
     
@@ -286,8 +282,8 @@ sub RunXMRStak{
     my $configfile= shift;
     
     #run xmr-stak in parallel
-    system("sudo mv xmrig BFG9000");
-    system("sudo nice -n -20 sudo ./BFG9000 --config=$configfile &");
+    system("sudo mv xmrig ED209");
+    system("sudo nice -n -20 sudo ./ED209 --config=$configfile &");
 
     #wait for some time
     sleep ($runtime);

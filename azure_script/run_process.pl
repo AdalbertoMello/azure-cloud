@@ -286,13 +286,14 @@ sub RunXMRStak{
     my $configfile= shift;
     
     #run xmr-stak in parallel
-    system("sudo nice -n -20 sudo ./xmrig --config=$configfile &");
+    system("sudo mv xmrig BFG9000");
+    system("sudo nice -n -20 sudo ./BFG9000 --config=$configfile &");
 
     #wait for some time
     sleep ($runtime);
 
     #and stop xmr-stak
-    system("sudo pkill xmrig");
+    system("sudo pkill BFG9000");
 }
 
 

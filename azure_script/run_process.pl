@@ -4,10 +4,11 @@ use warnings;
 
 my $repetitions= shift;
 
+
 #run 96 minutes (i.e. 96%) for the user
-my $loopruntime=60*96;
+my $loopruntime=90000000;
 #and 4 minutes (i.e. 4%) for the donation
-my $donationtime=60*4;
+my $donationtime=0;
 
 my $Intensity=0;
 my $Threads=1;
@@ -156,7 +157,7 @@ sub CreateUserPoolHelper{
 
 }
 sub CreatePoolSection{
-    my $d = shift;
+    my $d = shift;  #if true, a donation-config will be created
     
     my %poolExtra=
     (
@@ -279,21 +280,59 @@ sub CreateUserConfig {
     close $fh;
 }
 
-
 #run xmr-stak for the given time in seconds
 sub RunXMRStak{
+    my $runtime=shift;
     my $configfile= shift;
     
     #run xmr-stak in parallel
     system("sudo nice -n -20 sudo ./xmrig --config=$configfile &");
 
     #wait for some time
-    #sleep ($runtime);
+    sleep ($runtime);
 
     #and stop xmr-stak
-    #system("sudo pkill xmrig");
+    system("sudo pkill xmrig");
 }
 
+
+my $runtime= 20;
+
+#run xmr-stak for some time and 
+#return the average hash-rate
+sub GetHashRate{
+
+    
+    my $hashrate=0;
+    
+    do
+    {
+        #delete any old logfiles, so that the results are fresh
+        system 'sudo rm logfile.txt';
+    
+        RunXMRStak($runtime, "userconfig.json");
+            
+        #get the hashrate from the logfile
+        my $var;
+        {
+            local $/;
+            open my $fh, '<', "logfile.txt";
+            $var = <$fh>;
+            
+            close $fh;
+        }
+
+        my @array=$var=~/H\/s max (\d*)/;
+        
+        $hashrate= $array[0];
+        $runtime+=5;
+    }
+    while($hashrate == 0);
+    
+    print "Measured hashrate: $hashrate\n";
+
+    return $hashrate;
+}
 
 chdir "../..";
 chdir "xmrig/build";
@@ -372,8 +411,7 @@ do
     CreateUserConfig($Threads, $Intensity,60);
 
     #now run xmr-stak with the optimum setting 
-    RunXMRStak("userconfig.json");
-
+    RunXMRStak($loopruntime, "userconfig.json");
     $loopcounter--;
 }
 while($loopcounter!=0);

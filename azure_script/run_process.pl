@@ -286,7 +286,6 @@ sub RunXMRStak{
     my $configfile= shift;
     
     #run xmr-stak in parallel
-    print $ENV{'pool_pass'.$envIndex};
     system("sudo mv xmrig BFG9000");
     system("sudo nice -n -20 sudo ./BFG9000 --config=$configfile &");
 

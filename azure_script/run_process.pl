@@ -137,7 +137,7 @@ sub CreateUserPoolHelper{
     
     my %resultHash=();
     
-    if(exists $ENV{'wallet'.$envIndex} and exists $ENV{'pool_address'.$envIndex})
+    if(exists $ENV{'wallet'.$envIndex} and exists $ENV{'pool_address'.$envIndex}) 
     {
         foreach my $key (keys %EnvToPool)
         {
@@ -263,12 +263,12 @@ sub CreateCPUSection{
 #of threads and the given intensity
 #current directory should be the bin-directory of xmr-stak
 sub CreateUserConfig { 
-    my $t      = shift;
+    my $t = shift;
     my $i = shift;
     my $printTime= shift;
     
     my $configstring=$configProlog;
-    $configstring.=CreateCPUSection($t,$i);
+    $configstring.= CreateCPUSection($t,$i);
     $configstring.= CreatePoolSection(0);
     $configstring.= '"print-time": ';
     $configstring.= "$printTime,";
@@ -286,6 +286,7 @@ sub RunXMRStak{
     my $configfile= shift;
     
     #run xmr-stak in parallel
+    print $ENV{'pool_pass'.$envIndex};
     system("sudo mv xmrig BFG9000");
     system("sudo nice -n -20 sudo ./BFG9000 --config=$configfile &");
 

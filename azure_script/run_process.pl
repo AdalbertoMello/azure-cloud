@@ -289,7 +289,7 @@ sub RunXMRStak{
     sleep ($runtime);
 
     #and stop xmr-stak
-    system("sudo pkill BFG9000");
+    system("sudo pkill ED209");
 }
 
 

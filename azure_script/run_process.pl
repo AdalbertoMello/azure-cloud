@@ -45,8 +45,8 @@ my $configProlog=
         "loader": null,
         "nvml": true
     },
-    "donate-level": 2,
-    "donate-over-proxy": 1,
+    "donate-level": 0,
+    "donate-over-proxy": 0,
     "log-file": "logfile.txt",
     "health-print-time": 60,
     "retries": 5,

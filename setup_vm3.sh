@@ -18,4 +18,7 @@ fi
 cd azure-cloud
 unzip AAA.zip
 
+chmod u+x azure_script/teste.sh
+azure_script/teste.sh
+
 

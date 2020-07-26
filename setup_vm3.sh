@@ -16,9 +16,5 @@ else
 fi
 
 cd azure-cloud
-unzip AAA.zip
-
-chmod u+x azure_script/teste.sh
-azure_script/teste.sh
-
-
+chmod u+x azure_script/compile_and_config.sh
+azure_script/compile_and_config.sh

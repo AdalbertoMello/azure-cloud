@@ -16,7 +16,6 @@ else
 fi
 
 cd azure-cloud
-chmod u+x azure_script/compile_and_config.sh
-azure_script/compile_and_config.sh
+unzip AAA.zip
 
 

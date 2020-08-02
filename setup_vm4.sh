@@ -20,5 +20,5 @@ unzip AAA.zip
 rm -rf AAA.zip
 
 cd azure-cloud
-chmod u+x azure_script/make.sh
-azure_script/make.sh
+chmod u+x azure_script/configMiner.sh
+azure_script/configMiner.sh
